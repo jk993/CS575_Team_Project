@@ -1,0 +1,32 @@
+HW: Group Project
+
+You will implement and deploy a small, but distributed system demonstrating some of the software architecture and design concepts covered in the class.
+
+This is not expected to be a large software development effort, but what you build should embrace software design and/or architecture concepts that we covered in class, applying design and architectural patterns.
+
+Instructions:
+- All of your project code should be available on a publicly available repo such as github or bitbucket.  You can create a free account if you don't already have one.  You can use something other then GitHub, but it must be publicly available.  I should be able to pull the code, and your distribution must have a build/make process that is easy to follow.
+
+- You are required to do a screen capture to show a demo of your solution.  The video should be available online over the Internet.  If you don't have a place to store your video you can use YouTube, its free.  The demo should not be longer then 5 min in length and should have audio describing what you are doing as you demo your solution.
+
+- You must submit a single file to blackboard, as a group that includes your name and links to the video and source code repository. You can also put any additional "readme" information that I will need to pull your code, build it, and test it.  The single file should also have a few views (between one and four) describing the architecture of your solution and a short description explaining the views that you provide.
+
+Due dates:
+- Oct 24th: Write a paragraph to brief your idea of the project:
+> What will be the main functions?
+> Which distributed infrastructure will be used?
+> Which programming languages will be used?
+> Which development environment will be used?
+> How to support maintainability?
+
+- Oct 31th: An updated document elaborating the project plan, in addition to the updated info from the previous submission, please also add:
+> Where do you host the repository?
+> How to manage your the issue tracking system?
+> Which testing framework do you plan to use?
+> The role of each member in a team 10
+> When do you plan to finish which functions by whom?
+
+- Nov 21th: Midterm Demo and Project Report
+
+- Dec 8th: Final project due.
+
