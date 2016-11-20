@@ -1,0 +1,20 @@
+{
+  "name": "react_todo",
+  "homepage": "https://github.com/mischievousjayden/StudyWebDevelopment",
+  "authors": [
+    "Jayden <mischievousjayden@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design-lite": "^1.2.1"
+  }
+}
