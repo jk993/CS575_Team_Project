@@ -1,3 +1,4 @@
 
-frontend/bower_components
+frontend/node_modules
+frontend/src/bower_components
 
