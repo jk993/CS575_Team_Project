@@ -63,8 +63,8 @@ export default class ListCard extends React.Component {
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">All</button>
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Activate</button>
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Complete</button>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Untaken</button>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Taken</button>
                     </div>
                 </div>
             </main>            
