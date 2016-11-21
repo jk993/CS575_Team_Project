@@ -5,18 +5,21 @@ from django.db import models
 # Create your models here.
 
 class Customer(models.Model):
-    uid = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=20)
-    age = models.IntegerField()
+    name = models.CharField(max_length=20, primary_key=True)
+    def __str__(self):
+        return str(self.name)
 
-class Items(models.Model):
+class Item(models.Model):
     item_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
-    category = models.CharField(max_length=20)
-    price = models.IntegerField()
+    taken = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.name)
 
-class Shopping(models.Model):
-    item_id = models.ForeignKey(Customer)
-    uid = models.ForeignKey(Items)
-    amount = models.IntegerField()
+class List(models.Model):
+    listname = models.CharField(max_length=20, primary_key=True)
+    item = models.IntegerField()
 
+class Custom_List(models.Model):
+    cname = models.ForeignKey(Customer)
+    lname = models.ForeignKey(List)
