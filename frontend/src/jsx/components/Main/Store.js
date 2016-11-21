@@ -1,47 +1,28 @@
 import { EventEmitter } from "events";
 
 import dispatcher from "./Dispatcher.js";
+import AppData from "./Data.js";
 
 class Store extends EventEmitter {
     constructor() {
         super();
-        this.item_list = {
-            list1: [
-                {id: 1, text: "item11", taken: false},
-                {id: 2, text: "item12", taken: false},
-                {id: 3, text: "item13", taken: false}
-            ],
-            list2: [
-                {id: 1, text: "item21", taken: false},
-                {id: 2, text: "item22", taken: false},
-                {id: 3, text: "item23", taken: true},
-                {id: 3, text: "item24", taken: true}
-            ],
-            list3: [
-                {id: 1, text: "item31", taken: false},
-                {id: 2, text: "item32", taken: true},
-                {id: 3, text: "item33", taken: true}
-            ],
-            list4: [
-                {id: 1, text: "item41", taken: true},
-                {id: 2, text: "item42", taken: false},
-                {id: 3, text: "item43", taken: true}
-            ],
-            list5: [
-                {id: 1, text: "item51", taken: false},
-                {id: 2, text: "item52", taken: false},
-                {id: 3, text: "item53", taken: true},
-                {id: 4, text: "item54", taken: false},
-                {id: 5, text: "item55", taken: true},
-                {id: 6, text: "item56", taken: true},
-                {id: 7, text: "item57", taken: true},
-                {id: 8, text: "item58", taken: true}
-            ]
-        };
+        this.user_info = AppData.user_info;
+        this.item_list = AppData.list_info;
     };
 
-    getList() {
-        return Object.keys(this.item_list);
+    login(userid) {
+        console.log("in login", userid);
+        this.userid = userid;
+        this.emit("login");
+    }
+
+    getList(userid) {
+        return AppData.user_info[userid];
+    }
+
+    getItems(list_name) {
+        console.log("get item", AppData.list_info[list_name]);
+        return AppData.list_info[list_name];
     }
 
     createItem(list_name, text) {
@@ -68,14 +49,15 @@ class Store extends EventEmitter {
         this.emit("change");
     }
 
-    getItems(list_name) {
-        console.log("get item", this.item_list[list_name]);
-        return this.item_list[list_name];
-    }
+    
 
     handleAction(action) {
         console.log("Store received an action", action);
         switch(action.type) {
+            case "LOGIN": {
+                this.login(action.userid);
+                break;
+            }
             case "CREATE_ITEM": {
                 this.createItem(action.list_name, action.text);
                 break;
@@ -84,8 +66,12 @@ class Store extends EventEmitter {
                 this.removeItem(action.list_name, action.item_id);
                 break;
             }
-            case "CHANGE_COMPLETE": {
+            case "CHANGE_TAKEN": {
                 this.changeTaken(action.list_name, action.item_id);
+                break;
+            }
+            case "UPDATE_DATA": {
+                this.emit("change");
                 break;
             }
         }

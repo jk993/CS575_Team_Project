@@ -1,16 +1,16 @@
 import React from "react";
 
 import Items from "./Items.jsx";
-import Store from "./Store.js";
 import * as Action from "./Action.jsx";
+import Store from "./Store.js";
 
 
 export default class ListCard extends React.Component {
-    constructor(props) {
+	constructor(props) {
         super(props);
         this.state = {
-            list_name: this.props.list_name,
-            items: Store.getItems(this.props.list_name)
+            list_name: props.params.list_name,
+            items: Store.getItems(props.params.list_name)
         };
         this.getItems = this.getItems.bind(this);
         this.createItem = this.createItem.bind(this);
@@ -25,8 +25,9 @@ export default class ListCard extends React.Component {
     }
 
     getItems() {
-        var filtered = Store.getItems(this.state.list_name);
+        var filtered = Store.getItems(this.props.params.list_name);
         this.setState({
+			list_name: this.props.params.list_name,
             items: filtered
         });
     }
