@@ -16,6 +16,14 @@ class Store extends EventEmitter {
         this.emit("login");
     }
 
+    createList(userid, list_name) {
+        console.log("create list", userid, list_name);
+        this.item_list[list_name] = [];
+        this.user_info[userid].push(list_name);
+        console.log(this.user_info[userid], this.item_list[list_name]);
+        this.emit("change");
+    }
+
     getList(userid) {
         return AppData.user_info[userid];
     }
@@ -56,6 +64,10 @@ class Store extends EventEmitter {
         switch(action.type) {
             case "LOGIN": {
                 this.login(action.userid);
+                break;
+            }
+            case "CREATE_LIST": {
+                this.createList(action.userid, action.list_name);
                 break;
             }
             case "CREATE_ITEM": {

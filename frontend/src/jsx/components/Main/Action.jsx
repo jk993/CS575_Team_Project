@@ -37,3 +37,11 @@ export function updateData() {
     });
 }
 
+export function createList(userid, list_name) {
+    dispatcher.dispatch({
+        type: "CREATE_LIST",
+        userid,
+        list_name
+    });
+}
+
