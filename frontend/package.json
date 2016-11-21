@@ -1,12 +1,13 @@
 {
-  "name": "react_todo",
+  "name": "party_shopping_list",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf src/js/*",
-    "build": "./node_modules/.bin/webpack -d --watch",
+    "build": "./node_modules/.bin/webpack",
+    "build_watch": "./node_modules/.bin/webpack -d --watch",
     "build_prod": "NODE_ENV=production ./node_modules/.bin/webpack"
   },
   "author": "",

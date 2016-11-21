@@ -1,5 +1,12 @@
 import dispatcher from "./Dispatcher.js"
 
+export function login(userid) {
+    dispatcher.dispatch({
+        type: "LOGIN",
+        userid
+    });
+}
+
 export function createItem(list_name, text) {
     dispatcher.dispatch({
         type: "CREATE_ITEM",
@@ -21,6 +28,12 @@ export function changeTaken(list_name, item_id) {
         type: "CHANGE_TAKEN",
         list_name,
         item_id
+    });
+}
+
+export function updateData() {
+    dispatcher.dispatch({
+        type: "UPDATE_DATA"
     });
 }
 
