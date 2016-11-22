@@ -12,7 +12,9 @@ class Store extends EventEmitter {
 
     login(userid) {
         console.log("in login", userid);
-        this.userid = userid;
+        if(this.user_info[userid] == null)
+            this.user_info[userid] = [];
+        console.log("add user", this.user_info);
         this.emit("login");
     }
 

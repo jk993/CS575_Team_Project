@@ -1,15 +1,25 @@
 import React from "react";
-import { Link, browserHistory } from "react-router";
+import { Link, browserHistory, Navigation } from "react-router";
 
 import * as Action from "./Action.jsx";
+import Store from "./Store.js";
 
 export default class LoginCard extends React.Component {
     login() {
         var userid = document.getElementById("userid").value;
         console.log("userid", userid);
-        browserHistory.push(userid);
+        browserHistory.push("./#/"+userid);
         Action.login(userid);
-        window.location.reload()
+        //window.location.reload()
+    }
+
+    reload() {
+        window.location.reload();
+    }
+
+    componentDidUpdate() {
+        console.log("catch login");
+        Store.on("login", this.reload.bind(this));
     }
 
     render () {
