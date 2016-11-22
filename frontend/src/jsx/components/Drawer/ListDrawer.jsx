@@ -9,7 +9,7 @@ export default class ListDrawer extends React.Component {
         super(props);
         this.state = {
 			userid: props.userid,
-            list: Store.getList(props.userid)
+            list: Store.getList(props.userid) == null ? [] : Store.getList(props.userid)
         };
         console.log("list drawer", props.userid);
         console.log("list drawer", Store.getList(props.userid));
