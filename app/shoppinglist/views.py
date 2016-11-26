@@ -1,14 +1,28 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import Http404
+from shoppinglist.models import Item, Customer, List, Custom_List
 
 def index(request):
         return HttpResponse("<p>In Index View</p>")
 
 def item_detail(request, id):
-	return HttpResponse('<p>In item_detail view with id {0}</p>'.format(id))
+	try:
+		item = Item.objects.get(item_id=id) 
+	except Item.DoesNotExist:
+		raise Http404("This item does not exist") 
+	return  HttpResponse({"Item":item})
 
 def customer_detail(request, id):
-	return HttpResponse('<p>In customer_detail view with id {0}</p>'.format(id))
+	try:
+		customer = Customer.objects.get(name=id)
+	except Customer.DoesNotExist:
+		raise Http404("This customer does not exist") 
+	return HttpResponse({"Customer": customer})
 
 def list_detail(request, id):
-	return HttpResponse('<p>In list_detail view with id {0}</p>'.format(id))
+	try:
+		list_ = List.objects.get(listname=id)
+	except List.DoesNotExist:
+		raise Http404("This list does not exist") 
+	return HttpResponse({"List": list_})
+
