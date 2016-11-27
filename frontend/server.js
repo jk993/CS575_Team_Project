@@ -62,7 +62,8 @@ app.post("/api/createList", urlencodeParser, function(req, res) {
     var userid = req.body.userid;
     var list_name = req.body.list_name;
 
-    Data.list_info[list_name] = [];
+    if(Data.list_info[list_name] == null)
+        Data.list_info[list_name] = [];
     Data.user_info[userid].push(list_name);
     
     res.json({"message":"created new list " + list_name});
