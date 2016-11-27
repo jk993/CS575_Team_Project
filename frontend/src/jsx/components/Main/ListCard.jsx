@@ -10,10 +10,11 @@ export default class ListCard extends React.Component {
         super(props);
         this.state = {
             list_name: props.params.list_name,
-            items: Store.getItems(props.params.list_name)
+            items: []
         };
         this.getItems = this.getItems.bind(this);
         this.createItem = this.createItem.bind(this);
+        Action.getItems(props.params.list_name);
     }
 
     componentWillMount() {
@@ -24,8 +25,14 @@ export default class ListCard extends React.Component {
         Store.removeListner("change", this.getItems);
     }
 
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
+
+
     getItems() {
-        var filtered = Store.getItems(this.props.params.list_name);
+        var filtered = Store.getItems();
+        console.log("get item in card", filtered);
         this.setState({
 			list_name: this.props.params.list_name,
             items: filtered
@@ -40,9 +47,6 @@ export default class ListCard extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        componentHandler.upgradeDom();
-    } 
 
     render () {
         const { list_name, items } = this.state;

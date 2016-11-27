@@ -9,16 +9,27 @@ export default class ListDrawer extends React.Component {
         super(props);
         this.state = {
 			userid: props.userid,
-            list: Store.getList(props.userid) == null ? [] : Store.getList(props.userid)
+            list: Store.getList()
         };
-        console.log("list drawer", props.userid);
-        console.log("list drawer", Store.getList(props.userid));
         this.getList = this.getList.bind(this);
         this.createList = this.createList.bind(this);
+        Action.getList(props.userid);
     }
 
     componentWillMount() {
         Store.on("change", this.getList);
+    }
+
+    componentWillUnmount() {
+        Store.removeListner("change", this.getList);
+    }
+
+    getList() {
+        var list = Store.getList();
+        this.setState({
+			userid: this.props.userid,
+            list: list
+        });
     }
 
     createList() {
@@ -29,17 +40,9 @@ export default class ListDrawer extends React.Component {
         }
     }
 
-    getList() {
-        var list = Store.getList(this.props.userid);
-        this.setState({
-			userid: this.props.userid,
-            list: list
-        });
-    }
 
     render () {
         const { userid, list } = this.state;
-        console.log("list drawer", list);
         return(
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">{userid}</span>

@@ -8,7 +8,9 @@ class Store extends EventEmitter {
         super();
         this.user_info = AppData.user_info;
         this.item_list = AppData.list_info;
-    };
+        this.list = [];
+        this.items = [];
+    }
 
     login(userid) {
         console.log("in login", userid);
@@ -18,47 +20,26 @@ class Store extends EventEmitter {
         this.emit("login");
     }
 
-    createList(userid, list_name) {
-        console.log("create list", userid, list_name);
-        this.item_list[list_name] = [];
-        this.user_info[userid].push(list_name);
-        console.log(this.user_info[userid], this.item_list[list_name]);
+    getList() {
+        return this.list;
+    }
+
+    reloadList(list) {
+        this.list = list;
         this.emit("change");
     }
 
-    getList(userid) {
-        return AppData.user_info[userid];
-    }
 
     getItems(list_name) {
-        console.log("get item", AppData.list_info[list_name]);
-        return AppData.list_info[list_name];
+        console.log("get items", this.items);
+        return this.items;
     }
 
-    createItem(list_name, text) {
-        const id = Date.now();
-        this.item_list[list_name].push({id, text, taken:false});
-        console.log("create item", this.item_list[list_name]);
+    reloadItems(items) {
+        console.log("update items", items);
+        this.items = items;
         this.emit("change");
     }
-
-    removeItem(list_name, item_id) {
-        this.item_list[list_name] = this.item_list[list_name].filter(function(data, index) {
-            return data.id != item_id;
-        });
-        console.log("remove item", this.item_list[list_name]);
-        this.emit("change");
-    }
-
-    changeTaken(list_name, item_id) {
-        var result = this.item_list[list_name].filter(function(data, index) {
-            return data.id == item_id;
-        });
-        result[0].taken = !result[0].taken;
-        console.log("change taken", this.item_list[list_name]);
-        this.emit("change");
-    }
-
     
 
     handleAction(action) {
@@ -68,20 +49,12 @@ class Store extends EventEmitter {
                 this.login(action.userid);
                 break;
             }
-            case "CREATE_LIST": {
-                this.createList(action.userid, action.list_name);
+            case "GET_LIST": {
+                this.reloadList(action.list);
                 break;
             }
-            case "CREATE_ITEM": {
-                this.createItem(action.list_name, action.text);
-                break;
-            }
-            case "REMOVE_ITEM": {
-                this.removeItem(action.list_name, action.item_id);
-                break;
-            }
-            case "CHANGE_TAKEN": {
-                this.changeTaken(action.list_name, action.item_id);
+            case "GET_ITEMS": {
+                this.reloadItems(action.items);
                 break;
             }
             case "UPDATE_DATA": {

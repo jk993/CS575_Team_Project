@@ -27,7 +27,7 @@ export default class ShoppingList_Page extends React.Component {
 				userid: this.props.params.userid,
 				list_name: this.props.params.list_name
 			}));
-			Action.updateData();
+			Action.updateData(this.props.params.userid, this.props.params.list_name);
 		}
         // componentHandler.upgradeDom();
     }
