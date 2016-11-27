@@ -18,8 +18,12 @@ class Item(models.Model):
 
 class List(models.Model):
     listname = models.CharField(max_length=20, primary_key=True)
-    item = models.IntegerField()
 
 class Custom_List(models.Model):
     cname = models.ForeignKey(Customer)
     lname = models.ForeignKey(List)
+
+class List_Item(models.Model):
+    listname = models.ForeignKey(List)
+    item_id = models.ForeignKey(Item)
+
