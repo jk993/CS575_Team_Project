@@ -54,8 +54,20 @@ app.get('/', function(req, res) {
 });
 
 
-app.get("/api/getList/:user_name", function(req, res) {
-    res.json(Data.user_info[req.params.user_name]);
+app.post("/api/login", urlencodeParser, function(req, res) {
+    var userid = req.body.userid;
+    if(Data.user_info[userid] == null) {
+        Data.user_info[userid] = [];
+        res.json({"message":"created userid " + userid});
+    }
+    else {
+        res.json({"message":"login"});
+    }
+});
+
+
+app.get("/api/getList/:userid", function(req, res) {
+    res.json(Data.user_info[req.params.userid]);
 });
 
 app.post("/api/createList", urlencodeParser, function(req, res) {
@@ -68,7 +80,6 @@ app.post("/api/createList", urlencodeParser, function(req, res) {
     
     res.json({"message":"created new list " + list_name});
 });
-
 
 
 app.get("/api/getItems/:list_name", function(req, res) {
@@ -88,6 +99,17 @@ app.post("/api/createItem", urlencodeParser, function(req, res) {
     res.json({"message":"created new item " + new_item.text + " in list " + list_name});
 });
 
+app.post("/api/deleteItem", urlencodeParser, function(req, res) {
+    var list_name = req.body.list_name;
+    var id = req.body.id;
+
+    Data.list_info[list_name] = Data.list_info[list_name].filter(function(data, index) {
+        return data.id != id;
+    });
+
+    res.json({"message":"remove item"});
+});
+
 app.post("/api/changeTaken", urlencodeParser, function(req, res) {
     var list_name = req.body.list_name;
     var id = req.body.id;
@@ -99,17 +121,6 @@ app.post("/api/changeTaken", urlencodeParser, function(req, res) {
     });
 
     res.json({"message":"change taken"});
-});
-
-app.post("/api/deleteItem", urlencodeParser, function(req, res) {
-    var list_name = req.body.list_name;
-    var id = req.body.id;
-
-    Data.list_info[list_name] = Data.list_info[list_name].filter(function(data, index) {
-        return data.id != id;
-    });
-
-    res.json({"message":"remove item"});
 });
 
 

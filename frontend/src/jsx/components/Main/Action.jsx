@@ -3,9 +3,13 @@ import dispatcher from "./Dispatcher.js"
 var api_url = "http://192.168.0.102:3000"
 
 export function login(userid) {
-    dispatcher.dispatch({
-        type: "LOGIN",
-        userid
+    var user_info = {userid:userid};
+    $.post(api_url+"/api/login/", user_info, function(response) {
+        console.log(response);
+        dispatcher.dispatch({
+            type: "LOGIN",
+            userid
+        });
     });
 }
 

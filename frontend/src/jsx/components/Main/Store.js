@@ -1,22 +1,16 @@
 import { EventEmitter } from "events";
 
 import dispatcher from "./Dispatcher.js";
-import AppData from "./Data.js";
 
 class Store extends EventEmitter {
     constructor() {
         super();
-        this.user_info = AppData.user_info;
-        this.item_list = AppData.list_info;
         this.list = [];
         this.items = [];
     }
 
     login(userid) {
         console.log("in login", userid);
-        if(this.user_info[userid] == null)
-            this.user_info[userid] = [];
-        console.log("add user", this.user_info);
         this.emit("login");
     }
 
