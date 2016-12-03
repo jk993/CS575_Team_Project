@@ -81,6 +81,16 @@ app.post("/api/createList", urlencodeParser, function(req, res) {
     res.json({"message":"created new list " + list_name});
 });
 
+app.post("/api/removeList", urlencodeParser, function(req, res) {
+    var userid = req.body.userid;
+    var list_name = req.body.list_name;
+
+    Data.user_info[userid] = Data.user_info[userid].filter(function(data, index) {
+        return data != list_name;
+    });
+    res.json({"message":"remove list " + list_name + " from " + userid});
+});
+
 
 app.get("/api/getItems/:list_name", function(req, res) {
     res.json(Data.list_info[req.params.list_name]);

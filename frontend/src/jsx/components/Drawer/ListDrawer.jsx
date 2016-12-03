@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router";
+// import { Link } from "react-router";
 
 import * as Action from "../Main/Action.jsx";
 import Store from "../Main/Store.js";
+
+import ListLink from "./ListLink.jsx";
 
 export default class ListDrawer extends React.Component {
 	constructor(props) {
@@ -54,8 +56,8 @@ export default class ListDrawer extends React.Component {
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={this.createList.bind(this)} ><i class="material-icons">add</i></button>
 
                 <nav class="mdl-navigation">
-                    {list.map((element, index) => {
-                        return <Link class="mdl-navigation__link" key={index} to={userid+"/"+element}>{element}</Link>
+                    {list.map((list_name, index) => {
+                        return <ListLink key={list_name} userid={userid} list_name={list_name} />
                     })}
                 </nav>
             </div>

@@ -1,7 +1,6 @@
 import dispatcher from "./Dispatcher.js"
 
-// var api_url = "http://192.168.0.102:3000"
-var api_url = "http://144.118.162.100:3000"
+var api_url = "http://192.168.0.101:3000"
 
 export function login(userid) {
     var user_info = {userid:userid};
@@ -39,6 +38,14 @@ export function createList(userid, list_name) {
     var new_list = {userid:userid, list_name:list_name};
     $.post(api_url+"/api/createList/", new_list, function(response) {
         // console.log(response);
+        getList(userid);
+    });
+}
+
+export function removeList(userid, list_name) {
+    var target_list = {userid:userid, list_name:list_name};
+    $.post(api_url+"/api/removeList/", target_list, function(response) {
+        // console.log("remove response", response);
         getList(userid);
     });
 }
