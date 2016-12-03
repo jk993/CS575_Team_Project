@@ -10,7 +10,7 @@ export default class LoginCard extends React.Component {
         console.log("userid", userid);
         browserHistory.push("./#/"+userid);
         Action.login(userid);
-        //window.location.reload()
+        window.location.reload()
     }
 
     reload() {
