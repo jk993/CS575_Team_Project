@@ -10,7 +10,6 @@ class Store extends EventEmitter {
     }
 
     login(userid) {
-        console.log("in login", userid);
         this.emit("login");
     }
 
@@ -25,19 +24,16 @@ class Store extends EventEmitter {
 
 
     getItems(list_name) {
-        console.log("get items", this.items);
         return this.items;
     }
 
     reloadItems(items) {
-        console.log("update items", items);
         this.items = items;
         this.emit("change");
     }
     
 
     handleAction(action) {
-        console.log("Store received an action", action);
         switch(action.type) {
             case "LOGIN": {
                 this.login(action.userid);

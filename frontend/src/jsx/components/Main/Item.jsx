@@ -14,6 +14,7 @@ export default class Item extends React.Component {
 
     render () {
         const {id, text, taken} = this.props.item;
+        console.log("render item", id, text, taken);
         return(
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" >
                 <input type="checkbox" class="mdl-checkbox__input" checked={taken} onChange={this.changeTaken.bind(this)}/>

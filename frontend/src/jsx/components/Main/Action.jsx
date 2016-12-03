@@ -1,6 +1,7 @@
 import dispatcher from "./Dispatcher.js"
 
-var api_url = "http://192.168.0.102:3000"
+// var api_url = "http://192.168.0.102:3000"
+var api_url = "http://144.118.162.100:3000"
 
 export function login(userid) {
     var user_info = {userid:userid};
@@ -37,16 +38,15 @@ export function getList(userid) {
 export function createList(userid, list_name) {
     var new_list = {userid:userid, list_name:list_name};
     $.post(api_url+"/api/createList/", new_list, function(response) {
-        console.log(response);
+        // console.log(response);
         getList(userid);
     });
 }
 
 
 export function getItems(list_name) {
-    console.log("get item in action");
     $.getJSON(api_url+"/api/getItems/"+list_name, function(data) {
-        console.log(data);
+        // console.log("get items", data);
         dispatcher.dispatch({
             type: "GET_ITEMS",
             items: data
@@ -57,7 +57,7 @@ export function getItems(list_name) {
 export function createItem(list_name, text) {
     var new_item = {list_name:list_name, text:text};
     $.post(api_url+"/api/createItem/", new_item, function(response) {
-        console.log(response);
+        // console.log(response);
         getItems(list_name);
     });
 }
@@ -65,7 +65,7 @@ export function createItem(list_name, text) {
 export function changeTaken(list_name, item_id) {
     var target_item = {list_name:list_name, id:item_id};
     $.post(api_url+"/api/changeTaken/", target_item, function(response) {
-        console.log(response);
+        // console.log(response);
         getItems(list_name);
     });
 }
@@ -84,7 +84,7 @@ export function removeItem(list_name, item_id) {
     // });
 
     $.post(api_url+"/api/deleteItem/", target_item, function(response) {
-        console.log(response);
+        // console.log(response);
         getItems(list_name);
     });
 }

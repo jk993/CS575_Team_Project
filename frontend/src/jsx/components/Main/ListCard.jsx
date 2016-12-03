@@ -32,7 +32,6 @@ export default class ListCard extends React.Component {
 
     getItems() {
         var filtered = Store.getItems();
-        console.log("get item in card", filtered);
         this.setState({
 			list_name: this.props.params.list_name,
             items: filtered
