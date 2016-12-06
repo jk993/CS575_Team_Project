@@ -1,0 +1,32 @@
+{
+  "Tom": {
+    "name": "Tom",
+    "lists": [
+      "list1",
+      "list2",
+      "list3"
+    ]
+  },
+  "John": {
+    "name": "John",
+    "lists": [
+      "list2",
+      "list4"
+    ]
+  },
+  "Ellen": {
+    "name": "Ellen",
+    "lists": [
+      "list3",
+      "list5"
+    ]
+  },
+  "Mia": {
+    "name": "Mia",
+    "lists": [
+      "list6",
+      "list7",
+      "list8"
+    ]
+  }
+}
