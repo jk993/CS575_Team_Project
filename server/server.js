@@ -89,36 +89,62 @@ app.get("/api/getItems/:listName", function(req, res) {
 });
 
 app.post("/api/createItem", urlencodeParser, function(req, res) {
-    var list_name = req.body.list_name;
+    var listName = req.body.listName;
+    var itemName = req.body.itemName;
+    var listData = require('./lists.json');
+    var itemData = require('./items.json');
 
+    var new_item = {
+        "name": itemName,
+        "taken": false
+    };
 
-    Data.list_info[list_name].push(new_item);
+    itemData[itemName] = new_item;
+    fs.writeFile('items.json', JSON.stringify(itemData), function (err) {
+        if (err) return console.log(err);
+        res.end(JSON.stringify({"message":"add item " + itemName}));
+    });
 
-    res.json({"message":"created new item " + new_item.text + " in list " + list_name});
+    if(listData[listName]["items"].indexOf(itemName) < 0) {
+        listData[listName]["items"].push(itemName);
+        fs.writeFile('lists.json', JSON.stringify(listData), function (err) {
+            if (err) return console.log(err);
+            console.log("written to > lists.json");
+            res.end(JSON.stringify({"message":"add item " + itemName + " to list " + listName}));
+        });
+    } else {
+        res.end(JSON.stringify({"message": "item is in the list already"}));
+    }
+    res.end(JSON.stringify({"message":"created new item " + new_item.text + " in list " + listName}));
 });
 
 app.post("/api/deleteItem", urlencodeParser, function(req, res) {
-    var list_name = req.body.list_name;
-    var id = req.body.id;
+    var listName = req.body.listName;
+    var itemName = req.body.itemName;
+    var listData = require("./lists.json");
 
-    Data.list_info[list_name] = Data.list_info[list_name].filter(function(data, index) {
-        return data.id != id;
+    listData[listName]["items"] = listData[listName]["items"].filter(function(data, index) {
+        return data != itemName;
+    });
+    fs.writeFile('lists.json', JSON.stringify(listData), function (err) {
+        if (err) return console.log(err);
+        res.json({"message":"remove item " + itemName + " from list " + listName});
     });
 
-    res.json({"message":"remove item"});
 });
 
 app.post("/api/changeTaken", urlencodeParser, function(req, res) {
-    var list_name = req.body.list_name;
-    var id = req.body.id;
+    var listName = req.body.listName;
+    var itemName = req.body.itemName;
+    var itemData = require("./items.json");
 
-    Data.list_info[list_name].filter(function(data, index) {
-        if(data.id == id) {
-            data.taken = !data.taken;
+    for (var key in itemData){
+        if (key == itemName) {
+            itemData[key]["taken"] = !itemData[key]["taken"];
         }
-    });
-
-    res.json({"message":"change taken"});
+    }
+    res.json(itemData)
+    res.end(JSON.stringify({"message":"change taken"}));
 });
 
 

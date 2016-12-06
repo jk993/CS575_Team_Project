@@ -1,54 +1,26 @@
 {
-  "List1": {
-    "name": "List1",
-    "items": [
-      "milk",
-      "chicken",
-      "beef"
-    ]
+  "cabbage": {
+    "name": "cabbage",
+    "taken": false
   },
-  "List2": {
-    "name": "List2",
-    "items": [
-      "cabbage",
-      "chicken"
-    ]
+  "milk": {
+    "name": "milk",
+    "taken": false
   },
-  "List3": {
-    "name": "List3",
-    "items": [
-      "milk",
-      "barrot",
-      "suggar"
-    ]
+  "chicken": {
+    "name": "chicken",
+    "taken": false
   },
-  "List4": {
-    "name": "List1",
-    "items": [
-      "milk"
-    ]
+  "carrot": {
+    "name": "carrot",
+    "taken": false
   },
-  "List5": {
-    "name": "List1",
-    "items": [
-      "chicken",
-      "suggar"
-    ]
+  "suggar": {
+    "name": "suggar",
+    "taken": false
   },
-  "list6": {
-    "name": "list6",
-    "items": []
-  },
-  "list7": {
-    "name": "list7",
-    "items": []
-  },
-  "list8": {
-    "name": "list8",
-    "items": []
-  },
-  "list9": {
-    "name": "list9",
-    "items": []
+  "beef": {
+    "name": "beef",
+    "taken": false
   }
 }
