@@ -9,3 +9,9 @@ run_server:
 build:
 	npm run build_watch
 
+unit_test:
+	./node_modules/.bin/mocha
+
+codecoverage:
+	./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha
+

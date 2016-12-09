@@ -2,4 +2,5 @@
 frontend/node_modules
 frontend/src/bower_components
 frontend/src/js
+frontend/coverage
 
